@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Export Line Table</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      padding: 20px;
+    }
+    #table-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: max-content;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h2, h4 {
+      text-align: center;
+      margin: 5px 0;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 5px 10px;
+      text-align: center;
+      min-width: 60px;
+    }
+    td[contenteditable] {
+      background-color: #f9f9f9;
+    }
+    .yellow { background-color: yellow; }
+    .red { background-color: red; color: white; }
+    .green { background-color: green; color: white; }
+    .save-btn {
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .save-btn:hover {
+      background-color: #145ea8;
+    }
+  </style>
+</head>
+<body>
 
+<div id="table-container">
+  <h2>EXPORT LINE X12 AND X15</h2>
+  <h4 id="date"></h4>
+  <table id="exportTable">
+    <thead>
+      <tr>
+        <th>PROCESS</th>
+        <th>604</th>
+        <th>5999</th>
+        <th>488</th>
+        <th>682</th>
+        <th>539</th>
+        <th>643</th>
+        <th>645</th>
+        <th>641</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- All rows before TOTAL -->
+      <tr><td>LEAK TEST</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>FINAL</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>PINN PRESS</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>200%</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>TO RUNNING</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>TO PENDING</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>WASHING</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>OP. PENDING</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>IN BOX PACK</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr class="yellow"><td>REWORK/HOLD</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr><td>FOR PACKING</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr class="red"><td>REJECTION AREA</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <tr class="green"><td>RFD</td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td></tr>
+      <!-- TOTAL ROW -->
+      <tr id="totalRow"><td><b>TOTAL</b></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button class="save-btn" onclick="saveImage()">Save as Image</button>
+
+<script>
+  // Set date
+  document.getElementById("date").innerText = "DATE: " + new Date().toLocaleDateString('en-GB');
+
+  // Auto TOTAL update
+  const table = document.getElementById("exportTable");
+  const totalRow = document.getElementById("totalRow");
+
+  table.addEventListener("input", () => {
+    const rows = table.querySelectorAll("tbody tr");
+    const colCount = rows[0].cells.length;
+
+    for (let col = 1; col < colCount; col++) {
+      let sum = 0;
+      for (let row = 0; row < rows.length - 1; row++) { // skip TOTAL row
+        const cell = rows[row].cells[col];
+        const value = parseInt(cell.innerText);
+        if (!isNaN(value)) {
+          sum += value;
+        }
+      }
+      totalRow.cells[col].innerText = sum;
+    }
+  });
+
+  // Save as image
+  function saveImage() {
+    html2canvas(document.querySelector("#table-container")).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'export_table.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+</script>
+
+</body>
+</html>
