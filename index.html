@@ -52,6 +52,11 @@
     .save-btn:hover {
       background-color: #145ea8;
     }
+    .developer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -97,7 +102,7 @@
 </div>
 
 <button class="save-btn" onclick="saveImage()">Save as Image</button>
-
+    <p class="developer">Made by Mayappa with ❤️</p>
 <script>
   // Set date
   document.getElementById("date").innerText = "DATE: " + new Date().toLocaleDateString('en-GB');
