@@ -19,8 +19,19 @@ table {
   border-collapse: collapse;
   margin-top: 10px;
 }
+table, th, td {
+  box-sizing: border-box;
+  max-width: 60px;
+  max-height: 30px;
+  overflow: hidden;
+  line-height: 1.2;
+}
 th {
   font-size: 14px;
+  font-weight: bold;
+}
+td {
+  font-size: 11px !important;
 }
 th, td {
   border: 1px solid #999;
@@ -28,15 +39,11 @@ th, td {
   text-align: center;
   min-width: 60px;
   color: black;
-  font-size: 11px;
 }
 
 #table-container {
   font-size: 10px;
   transform: scale(1); /* optional */
-}
-td, th {
-  font-size: 10px !important; /* force consistent size */
 }
 .red {
   background-color: red;
