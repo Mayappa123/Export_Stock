@@ -40,7 +40,11 @@ function printPreview() {
 
 // Save table as image
 function saveImage() {
-  html2canvas(document.querySelector("#table-container")).then(canvas => {
+  const element = document.querySelector("#table-container");
+  html2canvas(element, {
+    scale: 1, // ✅ Prevent enlarged image
+    useCORS: true, // optional if you use external images/fonts
+  }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'export_table.png';
     link.href = canvas.toDataURL();
