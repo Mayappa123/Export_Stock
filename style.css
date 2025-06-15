@@ -30,6 +30,14 @@ th, td {
   color: black;
   font-size: 11px;
 }
+
+#table-container {
+  font-size: 10px;
+  transform: scale(1); /* optional */
+}
+td, th {
+  font-size: 10px !important; /* force consistent size */
+}
 .red {
   background-color: red;
   color: white !important;
