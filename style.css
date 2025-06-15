@@ -1,113 +1,30 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f3f3f3;
-  padding: 20px;
-}
-#table-container {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: max-content;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-h2, h4 {
-  text-align: center;
-  margin: 5px 0;
-}
-table {
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-table, th, td {
-  box-sizing: border-box;
-  max-width: 60px;
-  max-height: 30px;
-  overflow: hidden;
-  line-height: 1.2;
-}
-th {
-  font-size: 14px;
-  font-weight: bold;
-}
-td {
-  font-size: 11px !important;
-}
-th, td {
-  border: 1px solid #999;
-  padding: 5px 10px;
-  text-align: center;
-  min-width: 60px;
-  color: black;
-}
+// style.css body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f3f3f3; }
 
-table, th, td {
-  border: 1px solid #999;
-  border-collapse: collapse;
-  box-sizing: border-box;
-}
+#table-container { width: 100%; padding: 20px; background-color: white; border-radius: 0; box-shadow: none; overflow-x: auto; }
 
-td, th {
-  height: 32px; /* Fixed height for uniformity */
-  vertical-align: middle;
-  padding: 4px 6px;
-  font-size: 10px;
-  text-align: center;
-  color: black;
-}
+h2, h4 { text-align: center; margin: 5px 0; }
 
-th {
-  font-size: 13px;
-  font-weight: bold;
-}
+h2 { font-size: 20px; }
 
-#table-container {
-  font-size: 10px;
-  transform: scale(1); /* optional */
-}
+h4 { font-size: 14px; }
 
-#table-container {
-  background: white;
-  padding: 20px;
-  border-radius: 0;
-  width: max-content;
-  margin: auto;
-  box-shadow: none; /* <-- Remove shadow */
-}
-.red {
-  background-color: red;
-  color: white !important;
-}
-.green {
-  background-color: green;
-  color: white !important;
-}
-.yellow {
-  background-color: yellow;
-  color: black;
-}
-td[contenteditable] {
-  background-color: #f9f9f9;
-}
-.save-btn {
-  margin: 20px auto;
-  display: block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2e86de;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.save-btn:hover {
-  background-color: #145ea8;
-}
-.developer {
-  position: fixed;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-weight: bold;
-}
+#exportTable { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 10px; }
+
+th, td { border: 1px solid #999; padding: 5px; text-align: center; font-size: 10px; color: black; min-width: 60px; }
+
+th { font-size: 11px; font-weight: bold; }
+
+td[contenteditable] { background-color: #f9f9f9; }
+
+.red { background-color: red; color: white; }
+
+.green { background-color: green; color: white; }
+
+.yellow { background-color: yellow; color: black; }
+
+.save-btn, .print-btn { margin: 20px auto; display: block; padding: 10px 20px; font-size: 16px; background-color: #2e86de; color: white; border: none; cursor: pointer; border-radius: 5px; }
+
+.save-btn:hover, .print-btn:hover { background-color: #145ea8; }
+
+.developer { text-align: center; margin-top: 20px; font-weight: bold; }
+
