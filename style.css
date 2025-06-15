@@ -41,9 +41,38 @@ th, td {
   color: black;
 }
 
+table, th, td {
+  border: 1px solid #999;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+
+td, th {
+  height: 32px; /* Fixed height for uniformity */
+  vertical-align: middle;
+  padding: 4px 6px;
+  font-size: 10px;
+  text-align: center;
+  color: black;
+}
+
+th {
+  font-size: 13px;
+  font-weight: bold;
+}
+
 #table-container {
   font-size: 10px;
   transform: scale(1); /* optional */
+}
+
+#table-container {
+  background: white;
+  padding: 20px;
+  border-radius: 0;
+  width: max-content;
+  margin: auto;
+  box-shadow: none; /* <-- Remove shadow */
 }
 .red {
   background-color: red;
