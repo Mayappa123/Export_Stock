@@ -39,12 +39,13 @@ function printPreview() {
 }
 
 html2canvas(document.querySelector("#table-container"), {
-  scale: 1, // prevent zoom
-  useCORS: true
+  scale: 1, // no zoom
+  useCORS: true,
+  backgroundColor: "#ffffff" // force clean background
 }).then(canvas => {
   const link = document.createElement('a');
   link.download = 'export_table.png';
-  link.href = canvas.toDataURL();
+  link.href = canvas.toDataURL("image/png");
   link.click();
 });
 
