@@ -21,6 +21,23 @@ table.addEventListener("input", () => {
   }
 });
 
+function printPreview() {
+  const printContent = document.getElementById("table-container").outerHTML;
+  const printWindow = window.open('', '', 'width=1000,height=800');
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print Preview</title>
+        <link rel="stylesheet" href="style.css">
+      </head>
+      <body onload="window.print(); window.close();">
+        ${printContent}
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+}
+
 // Save table as image
 function saveImage() {
   html2canvas(document.querySelector("#table-container")).then(canvas => {
