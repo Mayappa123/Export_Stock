@@ -38,6 +38,16 @@ function printPreview() {
   printWindow.document.close();
 }
 
+html2canvas(document.querySelector("#table-container"), {
+  scale: 1, // prevent zoom
+  useCORS: true
+}).then(canvas => {
+  const link = document.createElement('a');
+  link.download = 'export_table.png';
+  link.href = canvas.toDataURL();
+  link.click();
+});
+
 // Save table as image
 function saveImage() {
   const element = document.querySelector("#table-container");
